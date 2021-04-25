@@ -1,0 +1,43 @@
+<div class="container-fluid p-0">
+  {% block styles %}
+  <link
+    rel="stylesheet"
+    href="{{url_for('static',filename='css/navbar.css')}}"
+  />
+  {% endblock %}
+
+  <div class="navbar bg-dark" style="display: flex">
+    <div class="nav-logo">
+      <a class="navbar-brand" href="/"> PitchIn60 </a>
+    </div>
+    <div class="nav-link">
+      {% if current_user.is_authenticated %}
+      <li>
+        <a href="{{url_for('main.profile',uname=current_user.username)}}"
+          >Profile</a >
+      </li>
+      <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
+      {% else %}
+      <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
+      {%endif%}
+    </div>
+  </div>
+</div>
+
+<!-- <div class="navbar navbar-inverse" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+   
+    </div>
+    <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li><a href="/">Home</a></li>
+        <li><a href="/">Home</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>hughes</li>
+      
+      </ul>
+    </div>
+  </div>
+</div> -->

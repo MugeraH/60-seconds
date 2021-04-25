@@ -20,6 +20,8 @@
     {{ fontawesome_html() }}
   </head>
   <body class="container-fluid">
-    {% block content %} {% endblock%}
+    {%block navbar%} {% include 'navbar.html'%} {%endblock%} 
+    {% block content %}
+    {% endblock%}
   </body>
 </html>
