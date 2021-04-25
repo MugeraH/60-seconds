@@ -1,8 +1,7 @@
 import os
 
 class Config:
-    pass
-    # SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mugera:Mugbwo9856@localhost/todo'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mugera:Mugbwo9856@localhost/pitches'
 
     
 
