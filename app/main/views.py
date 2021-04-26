@@ -1,7 +1,7 @@
 from flask import render_template,request,redirect,url_for,request,redirect,url_for,abort
 from . import main
 from flask_login import login_required,current_user
-from ..models import Pitch,Comment,User
+from ..models import Pitch,Comment,User,Upvote
 from .. import db,photos
 from .forms import UpdateProfile,PitchForm,CommentsForm
 
@@ -29,6 +29,7 @@ def new_pitch():
         user_id = current_user
         new_pitch_object = Pitch(pitch=pitch,user_id=current_user._get_current_object().id,category=category,title=title)
         new_pitch_object.save_pitch()
+       
         return redirect(url_for('main.index'))
     
     return render_template('new_pitch.html',form=form)
@@ -51,7 +52,55 @@ def add_comment(pitch_id):
     return render_template('comments.html',form=form,comments_list=comments_list,pitch=pitch)
 
 
+@main.route('/upvote_pitch/<int:user_id>/<int:pitch_id>')
+@login_required
+def upvote_pitch(pitch_id,user_id):
+    upvote = Upvote.query.filter_by(user_id =current_user._get_current_object().id).first()
+    # print( current_user._get_current_object().username)
+    print(pitch_id)
+    if upvote:
+        pitch_id = pitch_id
+        # print( current_user._get_current_object().username)
+        # print(pitch_id)
+        # print(upvote)
+        if upvote.user_id == current_user._get_current_object().id and upvote.pitch_id == pitch_id :         
+            print("upvote already exists")
+            return redirect(url_for("main.index"))
+        elif  upvote.pitch_id == pitch_id  and db.session.query(Upvote.id).filter_by(user_id=current_user._get_current_object().id) is not None   :
+            print("upvote already exists")
+            return redirect(url_for("main.index")) 
+        else:
+            print(pitch_id)
+            pitch_id = pitch_id
+            user_id = current_user._get_current_object().id
+            upvote_count = 1
+            new_upvote = Upvote(upvote_count=upvote_count,user_id = user_id,pitch_id = pitch_id)
+            new_upvote.add_upvote()
+            print("Added new upvote")
+            return redirect(url_for("main.index"))
+    # elif upvote.pitch_id == pitch_id  and db.session.query(Upvote.id).filter_by(user_id=current_user._get_current_object().id).first() is not None   :
+    #         print("upvote already exists")
+    #         return redirect(url_for("main.index"))
+    else:
+        pitch_id = pitch_id
+        user_id = current_user._get_current_object().id
+        upvote_count = 1
+        new_upvote = Upvote(upvote_count=upvote_count,user_id = user_id,pitch_id = pitch_id)
+        new_upvote.add_upvote()
+        print("Added new upvote")
+       
+    return redirect(url_for("main.index"))
+        
+        
 
+    
+    
+                 
+ 
+        
+   
+    
+   
 
 
 @main.route('/user/<uname>')

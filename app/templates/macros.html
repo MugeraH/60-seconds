@@ -12,6 +12,14 @@
       <div>comments : {{pitch.comments.count()}}</div>
       <div>
         <a
+          href="{{url_for('main.upvote_pitch',pitch_id=pitch.id,user_id=pitch.user.id)}}"
+          class="btn btn-success"
+          >like</a
+        >
+        <span>likes: {{pitch.upvotes.count()}}</span>
+      </div>
+      <div>
+        <a
           href="{{url_for('main.add_comment',pitch_id=pitch.id)}}"
           class="btn btn-outline-success"
           >Comments</a

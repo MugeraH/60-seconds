@@ -16,6 +16,7 @@ class User(db.Model,UserMixin):
     bio = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
     comments = db.relationship('Comment',backref='user',lazy='dynamic')
+    upvotes = db.relationship('Upvote',backref='user',lazy='dynamic')
     pass_secure = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
   
@@ -45,6 +46,7 @@ class Pitch(db.Model):
     category = db.Column(db.String(255))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
+    upvotes = db.relationship('Upvote',backref='pitch',lazy='dynamic')
     
     def save_pitch(self):
         db.session.add(self)
@@ -82,3 +84,33 @@ class Comment(db.Model):
     def __repr__(self):
         return f'Comment {self.pitch}'
 
+class Upvote(db.Model):
+    __tablename__ = 'upvotes'
+    id = id = db.Column(db.Integer,primary_key = True)
+    upvote_count=  db.Column(db.Integer, default=0)
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    def add_upvote(self):
+        if self not in db.session:
+            db.session.add(self)
+            db.session.commit()  
+           
+        
+       
+        
+    @classmethod
+    def get_upvote(cls,pitch_id):
+        upvote = Upvote.query.filter_by(pitch_id=pitch_id).first()
+        return upvote.upvote_count
+       
+        
+    
+        
+        
+    
+  
+
+    def __repr__(self):
+        return f'Comment {self.pitch}'
+    
