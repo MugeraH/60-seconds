@@ -9,6 +9,7 @@
       <div>
         <span>{{pitch.user.username}}</span>
       </div>
+      <div>comments : {{pitch.comments.count()}}</div>
       <div>
         <a
           href="{{url_for('main.add_comment',pitch_id=pitch.id)}}"
@@ -25,14 +26,13 @@
 
 {% macro displayPitchCommentsList(comments_list)%} {% for comment in
 comments_list%}
-<div class="col-md-4">
-  <div class="card m-2">
-    <div class="card-body">
-      <p class="card-title">{{comment.pitch.pitch}}</p>
-      <p class="card-text">{{comment.comment}}</p>
-      <div>
-        <span>{{comment.user.username}}</span>
-      </div>
+
+<div class="card m-2">
+  <div class="card-body">
+    <!-- <p class="card-title">{{comment.pitch.pitch}}</p> -->
+    <p class="card-text">{{comment.comment}}</p>
+    <div>
+      <span>{{comment.user.username}}</span>
     </div>
   </div>
 </div>

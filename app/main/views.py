@@ -11,7 +11,7 @@ from .forms import UpdateProfile,PitchForm,CommentsForm
 @main.route('/')
 def index():
     pitches_list= Pitch.query.all()
-    print(pitches_list)
+
     return render_template('index.html',pitches_list=pitches_list)
 
 
@@ -20,6 +20,7 @@ def index():
 @login_required
 def new_pitch():
     form = PitchForm()
+  
     
     if form.validate_on_submit():
         title = form.title.data
@@ -38,6 +39,7 @@ def new_pitch():
 def add_comment(pitch_id):
     form = CommentsForm()
     pitch = Pitch.query.get(pitch_id)
+    
     comments_list = Comment.get_comments(pitch_id)
     if form.validate_on_submit():
         comment = form.comment.data 
@@ -46,7 +48,7 @@ def add_comment(pitch_id):
         new_comment = Comment(comment = comment,user_id = user_id,pitch_id = pitch_id)
         new_comment.save_comment()
         return redirect(url_for('.add_comment', pitch_id = pitch_id))
-    return render_template('comments.html',form=form,comments_list=comments_list)
+    return render_template('comments.html',form=form,comments_list=comments_list,pitch=pitch)
 
 
 
