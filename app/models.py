@@ -15,10 +15,9 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(255),unique=True,index=True)
     bio = db.Column(db.String(255))
     pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
-    comment = db.relationship('Comment',backref='pitch',lazy='dynamic')
+    comments = db.relationship('Comment',backref='user',lazy='dynamic')
     pass_secure = db.Column(db.String(255))
-    
-    # profile_pic_path = db.Column(db.String())
+    profile_pic_path = db.Column(db.String())
   
     
     @property

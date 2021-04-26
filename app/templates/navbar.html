@@ -12,9 +12,12 @@
     </div>
     <div class="nav-link">
       {% if current_user.is_authenticated %}
+
+      <li style="color: white; padding: 15px">{{current_user.username}}</li>
       <li>
         <a href="{{url_for('main.profile',uname=current_user.username)}}"
-          >Profile</a >
+          >Profile</a
+        >
       </li>
       <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
       {% else %}
