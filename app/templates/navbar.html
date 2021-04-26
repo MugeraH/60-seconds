@@ -15,6 +15,12 @@
 
       <li style="color: white; padding: 15px">{{current_user.username}}</li>
       <li>
+        <a href="{{url_for('main.new_pitch')}}" class="btn btn-primary"
+          >Add pitch</a
+        >
+      </li>
+
+      <li>
         <a href="{{url_for('main.profile',uname=current_user.username)}}"
           >Profile</a
         >

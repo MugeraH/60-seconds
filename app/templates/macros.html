@@ -1,0 +1,40 @@
+{% macro displayPitchList(pitches_list)%} {% for pitch in pitches_list%}
+<div class="col-md-4">
+  <div class="card m-2">
+    <div class="card-body">
+      <h5 class="card-title">{{pitch.title}}</h5>
+      <h5 class="card-title">{{pitch.category}}</h5>
+
+      <p class="card-text">{{pitch.pitch}}</p>
+      <div>
+        <span>{{pitch.user.username}}</span>
+      </div>
+      <div>
+        <a
+          href="{{url_for('main.add_comment',pitch_id=pitch.id)}}"
+          class="btn btn-outline-success"
+          >Comments</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %} {% endmacro %}
+<!-- comments -->
+
+{% macro displayPitchCommentsList(comments_list)%} {% for comment in
+comments_list%}
+<div class="col-md-4">
+  <div class="card m-2">
+    <div class="card-body">
+      <p class="card-title">{{comment.pitch.pitch}}</p>
+      <p class="card-text">{{comment.comment}}</p>
+      <div>
+        <span>{{comment.user.username}}</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %} {% endmacro %}
