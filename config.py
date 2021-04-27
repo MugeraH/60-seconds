@@ -12,9 +12,7 @@ class Config:
     MAIL_USERNAME = os.environ.get("MAIL_USERNAME")
     MAIL_PASSWORD = os.environ.get("MAIL_PASSWORD")
     
-    # # simple mde  configurations
-    # SIMPLEMDE_JS_IIFE = True
-    # SIMPLEMDE_USE_CDN = True
+    
 
     
 
@@ -23,10 +21,16 @@ class ProdConfig(Config):
     pass
 
 
+class TestConfig(Config):
+    SQLALCHEMY_DATABASE_URI ='postgresql+psycopg2://mugera:Mugbwo9856@localhost/pitches_test'
+    
 class DevConfig(Config):
+   
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://mugera:Mugbwo9856@localhost/pitches'
     DEBUG = True
 
 config_options = {
 'development':DevConfig,
-'production':ProdConfig
+'production':ProdConfig,
+'test':TestConfig
 }

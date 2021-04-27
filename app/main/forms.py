@@ -6,8 +6,8 @@ CATEGORY_CHOICES = [('Pickup_lines', 'Pickup_lines'), ('Interview', 'Interview')
 
 class PitchForm(FlaskForm):
     title = StringField('Pitch title',validators=[Required()])
-    category = SelectField('Category',choices=CATEGORY_CHOICES,validators=[Required()])
-    pitch = TextAreaField('60 seconds pitch.',validators = [Required()])
+    category = SelectField('Click to select category',choices=CATEGORY_CHOICES,validators=[Required()])
+    pitch = TextAreaField('Write 60 seconds pitch.',validators = [Required()])
     
     submit = SubmitField('Submit')
 
