@@ -2,33 +2,51 @@
   {% block styles %}
   <link
     rel="stylesheet"
-    href="{{url_for('static',filename='css/navbar.css')}}"
+    href="{{url_for('static',filename='css/index.css')}}"
   />
   {% endblock %}
 
-  <div class="navbar bg-dark" style="display: flex">
+  <div class="navbar m-0">
     <div class="nav-logo">
       <a class="navbar-brand" href="/"> PitchIn60 </a>
     </div>
-    <div class="nav-link">
+    <div class="nav-links">
       {% if current_user.is_authenticated %}
 
-      <li style="color: white; padding: 15px">{{current_user.username}}</li>
+      <li class="nav-item dropdown">
+        <a
+          class="nav-link dropdown-toggle"
+          href="#"
+          id="navbarDropdown"
+          role="button"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          {{current_user.username}}
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <li>
+            <a
+              class="nav-link"
+              href="{{url_for('main.profile',uname=current_user.username)}}"
+              >Profile</a
+            >
+          </li>
+          <li>
+            <a class="nav-link" href="{{url_for('auth.logout')}}">Sign out</a>
+          </li>
+          {% else %}
+          <li>
+            <a class="nav-link" href="{{url_for('auth.login')}}">Sign in</a>
+          </li>
+          {%endif%}
+        </ul>
+      </li>
       <li>
         <a href="{{url_for('main.new_pitch')}}" class="btn btn-primary"
           >Add pitch</a
         >
       </li>
-
-      <li>
-        <a href="{{url_for('main.profile',uname=current_user.username)}}"
-          >Profile</a
-        >
-      </li>
-      <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-      {% else %}
-      <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-      {%endif%}
     </div>
   </div>
 </div>
