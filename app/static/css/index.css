@@ -292,7 +292,7 @@ textarea {
 }
 
 .posts-container {
-  height: 680px;
+  height: 690px;
 
   display: flex;
   flex-direction: column;
@@ -302,13 +302,14 @@ textarea {
 }
 
 .post-wrapper {
-  height: 130px;
+  height: 150px;
   width: 600px;
   border-bottom: 1px solid white;
   padding-top: 10px;
 }
 .post-wrapper p {
   font-size: 25px;
+  line-height: 24px;
 }
 .post-wrapper .post-date {
   padding-top: 20px;
