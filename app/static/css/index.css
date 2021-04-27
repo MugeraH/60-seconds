@@ -212,7 +212,6 @@ select,
 input {
   height: 48px;
   margin-bottom: 15px;
-
 }
 label {
   color: white;
@@ -363,4 +362,26 @@ textarea {
 .user_details_bio .message {
   color: rgb(68, 67, 67);
   font-size: 20px;
+}
+
+.error_container {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(10, 10, 10, 0.37);
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(3px);
+  height: 300px;
+}
+
+.error_container h1 {
+  font-size: 70px;
+  color: red;
+  font-weight: 900;
+}
+.error_container p {
+  font-size: 20px;
+}
+
+.error_container p a {
+  color: green;
 }
