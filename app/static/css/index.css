@@ -286,7 +286,7 @@ textarea {
   width: 85%;
   height: 730px;
 
-  margin: 10px auto;
+  margin: 2px auto;
   padding: 20px;
   overflow-y: hidden;
 }
@@ -302,12 +302,17 @@ textarea {
 }
 
 .post-wrapper {
-  height: 100px;
+  height: 130px;
+  width: 600px;
   border-bottom: 1px solid white;
   padding-top: 10px;
 }
 .post-wrapper p {
-  font-size: 26px;
+  font-size: 25px;
+}
+.post-wrapper .post-date {
+  padding-top: 20px;
+  color: rgb(255, 255, 255);
 }
 .post-details {
   display: flex;
@@ -332,7 +337,7 @@ textarea {
 }
 .profile-container {
   height: 530px;
-  margin: 50px auto;
+  margin: 120px auto;
   border-radius: 10px;
   padding: 20px;
 
@@ -345,6 +350,11 @@ textarea {
 
 .user_details_container {
   height: 380px;
+}
+.user_profile_picture {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .user_profile_picture img {
   height: 350px;

@@ -1,10 +1,22 @@
-{% macro displayPitchList(pitches_list)%} {% for pitch in pitches_list%}
+{% macro displayPitchList(pitches_list)%} {%if not pitches_list%}
+
+<h3 class="text-center text-white mt-3">
+  Welcome traveller,there are no pitches in this category yet
+</h3>
+<a class="nav-link text-center mt-1" href="{{url_for('main.new_pitch')}}"
+  >Add Pitch</a
+>
+
+{%else%} {% for pitch in pitches_list%}
 <div class="col-md-4">
   <div class="card m-2">
     <div class="card-body">
       <div class="title-wrapper">
-        <h5 class="pitch-title">{{pitch.title}}</h5>
-        <h5 class="pitch-category">{{pitch.category}}</h5>
+        <h5 class="pitch-title">
+          <span>Title:</span>
+          {{pitch.title}}
+        </h5>
+        <h5 class="pitch-category"><span>Category:</span>{{pitch.category}}</h5>
       </div>
       <div class="pitch-wrapper">
         <p class="card-text m-0 p-0">{{pitch.pitch}}</p>
@@ -47,7 +59,7 @@
   </div>
 </div>
 
-{% endfor %} {% endmacro %}
+{% endfor %} {%endif%} {% endmacro %}
 <!-- comments -->
 
 {% macro displayPitchCommentsList(comments_list)%} {% for comment in
@@ -75,6 +87,7 @@ comments_list%}
   </div>
   <div class="post-wrapper">
     <p class="card-text m-0 p-0">{{post.pitch}}</p>
+    <h6 class="post-date">Posted on {{post.time.date()}}</h6>
   </div>
   <div class="post-details mt-2">
     <div class="comments">comments : {{post.comments.count()}}</div>

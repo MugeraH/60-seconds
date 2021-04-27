@@ -17,10 +17,11 @@ def index():
 @main.route('/filter/<int:pitch_query>')
 def filter(pitch_query):  
     categories = {"1":"Interview","2":"Advertisement","3":"Humour","4":"Pickup_lines"}
-    print(categories.get(str(pitch_query)))
+    
         
     filtered_pitches_list = Pitch.get_pitches(categories.get(str(pitch_query)))
-  
+    print(filtered_pitches_list)
+      
     return render_template('filter_pitch.html',pitches_list=filtered_pitches_list)
 
   

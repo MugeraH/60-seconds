@@ -3,9 +3,9 @@ super() }}
 <link rel="stylesheet" href="{{url_for('static',filename='/css/index.css')}}" />
 {% endblock %}{%block content%}
 <div class="main-container container-fluid">
-   <div class="btn-group">
+  <div class="btn-group">
     <a class="btn-link" href="/">All</a>
-    <a class=" btn-link" href="{{url_for('main.filter',pitch_query=1)}}"
+    <a class="btn-link" href="{{url_for('main.filter',pitch_query=1)}}"
       >Interview</a
     >
     <a class="btn-link" href="{{url_for('main.filter',pitch_query=2)}}"

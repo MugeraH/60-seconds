@@ -68,8 +68,7 @@ class Comment(db.Model):
     id = db.Column(db.Integer,primary_key = True)
     comment = db.Column(db.String(255),unique=True)
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id')) 
        
     def save_comment(self):
         if self not in db.session:
@@ -79,10 +78,8 @@ class Comment(db.Model):
     @classmethod
     def get_comments(cls,pitch_id):
         comments = Comment.query.filter_by(pitch_id=pitch_id).all()
-        return comments
-    
+        return comments  
   
-
     def __repr__(self):
         return f'Comment {self.pitch}'
 
