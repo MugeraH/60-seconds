@@ -17,6 +17,7 @@ class User(db.Model,UserMixin):
     pitches = db.relationship('Pitch', backref='user', lazy='dynamic')
     comments = db.relationship('Comment',backref='user',lazy='dynamic')
     upvotes = db.relationship('Upvote',backref='user',lazy='dynamic')
+    downvotes = db.relationship('Downvote',backref='user',lazy='dynamic')
     pass_secure = db.Column(db.String(255))
     profile_pic_path = db.Column(db.String())
   
@@ -47,6 +48,7 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvotes = db.relationship('Upvote',backref='pitch',lazy='dynamic')
+    downvotes = db.relationship('Downvote',backref='pitch',lazy='dynamic')
     
     def save_pitch(self):
         db.session.add(self)
@@ -54,7 +56,7 @@ class Pitch(db.Model):
         
     @classmethod
     def get_pitches(cls,pitch_category):
-        pitches = Pitch.query.filter_by(pitch_category=pitch_category).all()
+        pitches = Pitch.query.filter_by(category=pitch_category).all()
         return pitches
   
     def __repr__(self):
@@ -86,7 +88,7 @@ class Comment(db.Model):
 
 class Upvote(db.Model):
     __tablename__ = 'upvotes'
-    id = id = db.Column(db.Integer,primary_key = True)
+    id = id = db.Column(db.Integer,primary_key = True,unique=True)
     upvote_count=  db.Column(db.Integer, default=0)
     pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -94,23 +96,29 @@ class Upvote(db.Model):
     def add_upvote(self):
         if self not in db.session:
             db.session.add(self)
-            db.session.commit()  
-           
-        
-       
-        
+            db.session.commit()         
     @classmethod
     def get_upvote(cls,pitch_id):
         upvote = Upvote.query.filter_by(pitch_id=pitch_id).first()
         return upvote.upvote_count
-       
-        
-    
-        
-        
-    
-  
-
     def __repr__(self):
-        return f'Comment {self.pitch}'
+        return f'Upvote {self.pitch}'
+    
+class Downvote(db.Model):
+    __tablename__ = 'downvotes'
+    id = id = db.Column(db.Integer,primary_key = True,unique=True)
+    downvote_count=  db.Column(db.Integer, default=0)
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    
+    def add_downvote(self):
+        if self not in db.session:
+            db.session.add(self)
+            db.session.commit()         
+    @classmethod
+    def get_downvote(cls,pitch_id):
+        downvote = downvote.query.filter_by(pitch_id=pitch_id).first()
+        return downvote.downvote_count
+    def __repr__(self):
+        return f'Downvote {self.pitch}'
     

@@ -20,6 +20,15 @@
       </div>
       <div>
         <a
+          href="{{url_for('main.downvote_pitch',pitch_id=pitch.id,user_id=pitch.user.id)}}"
+          class="btn btn-danger"
+          >dislike</a
+        >
+
+        <span>dislikes: {{pitch.downvotes.count()}}</span>
+      </div>
+      <div>
+        <a
           href="{{url_for('main.add_comment',pitch_id=pitch.id)}}"
           class="btn btn-outline-success"
           >Comments</a
