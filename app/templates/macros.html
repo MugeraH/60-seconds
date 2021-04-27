@@ -2,37 +2,46 @@
 <div class="col-md-4">
   <div class="card m-2">
     <div class="card-body">
-      <h5 class="card-title">{{pitch.title}}</h5>
-      <h5 class="card-title">{{pitch.category}}</h5>
+      <div class="title-wrapper">
+        <h5 class="pitch-title">{{pitch.title}}</h5>
+        <h5 class="pitch-category">{{pitch.category}}</h5>
+      </div>
+      <div class="pitch-wrapper">
+        <p class="card-text m-0 p-0">{{pitch.pitch}}</p>
+        <div class="author">
+          <span>{{pitch.user.username}}</span>
+        </div>
+      </div>
 
-      <p class="card-text">{{pitch.pitch}}</p>
-      <div>
-        <span>{{pitch.user.username}}</span>
-      </div>
-      <div>comments : {{pitch.comments.count()}}</div>
-      <div>
-        <a
-          href="{{url_for('main.upvote_pitch',pitch_id=pitch.id,user_id=pitch.user.id)}}"
-          class="btn btn-success"
-          >like</a
-        >
-        <span>likes: {{pitch.upvotes.count()}}</span>
-      </div>
-      <div>
-        <a
-          href="{{url_for('main.downvote_pitch',pitch_id=pitch.id,user_id=pitch.user.id)}}"
-          class="btn btn-danger"
-          >dislike</a
-        >
+      <div class="pitch-actions">
+        <div class="pitch-details">
+          <div class="comments">comments : {{pitch.comments.count()}}</div>
+          <div>
+            <a
+              href="{{url_for('main.upvote_pitch',pitch_id=pitch.id,user_id=pitch.user.id)}}"
+              class="fa fa-thumbs-up fa-1x text-success"
+            ></a>
 
-        <span>dislikes: {{pitch.downvotes.count()}}</span>
-      </div>
-      <div>
-        <a
-          href="{{url_for('main.add_comment',pitch_id=pitch.id)}}"
-          class="btn btn-outline-success"
-          >Comments</a
-        >
+            <span>{{pitch.upvotes.count()}}</span>
+          </div>
+          <div>
+            <a
+              href="{{url_for('main.downvote_pitch',pitch_id=pitch.id,user_id=pitch.user.id)}}"
+              class="fa fa-thumbs-down fa-1x text-danger"
+            ></a>
+
+            <span>{{pitch.downvotes.count()}}</span>
+          </div>
+        </div>
+
+        <div>
+          <a
+            href="{{url_for('main.add_comment',pitch_id=pitch.id)}}"
+            class="nav-link-btn mb-4"
+          >
+            Add Comment</a
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -46,10 +55,9 @@ comments_list%}
 
 <div class="card m-2">
   <div class="card-body">
-    <!-- <p class="card-title">{{comment.pitch.pitch}}</p> -->
     <p class="card-text">{{comment.comment}}</p>
     <div>
-      <span>{{comment.user.username}}</span>
+      <span class="author">{{comment.user.username}}</span>
     </div>
   </div>
 </div>
