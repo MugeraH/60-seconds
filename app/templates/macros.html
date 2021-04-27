@@ -63,3 +63,25 @@ comments_list%}
 </div>
 
 {% endfor %} {% endmacro %}
+
+<!-- user posts -->
+
+{% macro displayUserPost(posts)%} {% for post in posts%}
+
+<div class="card m-3 p-3">
+  <div class="title-wrapper">
+    <h5 class="pitch-title">Title: {{post.title}}</h5>
+    <h5 class="pitch-category">Category: {{post.category}}</h5>
+  </div>
+  <div class="post-wrapper">
+    <p class="card-text m-0 p-0">{{post.pitch}}</p>
+  </div>
+  <div class="post-details mt-2">
+    <div class="comments">comments : {{post.comments.count()}}</div>
+    <a href="{{url_for('main.add_comment',pitch_id=post.id)}}" class="link-btn"
+      >View Comments</a
+    >
+  </div>
+</div>
+
+{% endfor %} {% endmacro %}

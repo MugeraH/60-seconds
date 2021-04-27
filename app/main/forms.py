@@ -12,11 +12,11 @@ class PitchForm(FlaskForm):
     submit = SubmitField('Submit')
 
 class CommentsForm(FlaskForm):
-    comment = TextAreaField('60 seconds pitch.',validators = [Required()])
+    comment = TextAreaField('Add your comment.',validators = [Required()])
     
     submit = SubmitField('Submit')
 
 
 class UpdateProfile(FlaskForm):
-    bio = TextAreaField('Tell us about you.',validators = [Required()])
+    bio = TextAreaField('Lets get to know you better.',validators = [Required()])
     submit = SubmitField('Submit')

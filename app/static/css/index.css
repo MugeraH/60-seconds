@@ -9,13 +9,16 @@ html {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  padding: 0;
+  padding-bottom: 40px;
+  overflow-y: hidden;
 }
 body {
   background: transparent;
+  height: 100%;
   width: 100vw;
-  margin-top: 5px;
+  margin-top: 5px 0px 60px 0px;
   font-family: "Roboto", sans-serif;
+  overflow-y: scroll;
 }
 *::-webkit-scrollbar {
   width: 10px;
@@ -62,7 +65,7 @@ li {
   margin-left: 10px;
 }
 .navbar-brand:hover {
-  color: white;
+  color: rgb(9, 235, 243);
 }
 .nav-links {
   display: flex;
@@ -171,6 +174,7 @@ li {
 .pitch-actions {
   display: flex;
   flex-direction: column;
+  margin-bottom: 10px;
 }
 
 .pitch-details {
@@ -276,4 +280,86 @@ textarea {
 
 .sign-up a {
   color: rgb(6, 230, 6);
+}
+
+.profile-wrapper {
+  width: 85%;
+  height: 730px;
+
+  margin: 10px auto;
+  padding: 20px;
+  overflow-y: hidden;
+}
+
+.posts-container {
+  height: 680px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 20px 10px 20px;
+  overflow-y: scroll;
+}
+
+.post-wrapper {
+  height: 100px;
+  border-bottom: 1px solid white;
+  padding-top: 10px;
+}
+.post-wrapper p {
+  font-size: 26px;
+}
+.post-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+}
+.post-details .comments {
+  font-size: 19px;
+}
+.link-btn {
+  color: white;
+  font-size: 15px;
+  border: 1px solid white;
+  padding: 10px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.link-btn:hover {
+  color: rgb(9, 235, 243);
+}
+.profile-container {
+  height: 530px;
+  margin: 50px auto;
+  border-radius: 10px;
+  padding: 20px;
+
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(10, 10, 10, 0.37);
+  backdrop-filter: blur(3px);
+  border-radius: 10px;
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.user_details_container {
+  height: 380px;
+}
+.user_profile_picture img {
+  height: 350px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: none;
+}
+
+.user_details_bio .user_name {
+  font-size: 35px;
+}
+.user_details_bio .user_bio {
+  font-size: 25px;
+}
+.user_details_bio .message {
+  color: rgb(68, 67, 67);
+  font-size: 20px;
 }
