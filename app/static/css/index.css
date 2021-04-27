@@ -125,6 +125,9 @@ li {
 .btn-link:hover {
   color: rgb(9, 235, 243);
 }
+.btn-link:active {
+  color: rgb(9, 235, 243);
+}
 .btn-link:first-child {
   border-left: none;
 }
