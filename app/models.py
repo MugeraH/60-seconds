@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import datetime
 from flask_login import UserMixin
 from . import login_manager
+from sqlalchemy.exc import SQLAlchemyError
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -45,14 +46,18 @@ class Pitch(db.Model):
     pitch = db.Column(db.String(255))
     time = db.Column(db.DateTime, default = datetime.utcnow)
     category = db.Column(db.String(255))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='SET NULL'),nullable = True)
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
     upvotes = db.relationship('Upvote',backref='pitch',lazy='dynamic')
     downvotes = db.relationship('Downvote',backref='pitch',lazy='dynamic')
     
     def save_pitch(self):
-        db.session.add(self)
-        db.session.commit()
+        try:
+            db.session.add(self)
+            db.session.commit()
+        except SQLAlchemyError as e:
+            print(str(e))
+            db.session.rollback()
         
     @classmethod
     def get_pitches(cls,pitch_category):
@@ -67,8 +72,8 @@ class Comment(db.Model):
     __tablename__ = 'comments'
     id = db.Column(db.Integer,primary_key = True)
     comment = db.Column(db.String(255),unique=True)
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id')) 
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id',ondelete='SET NULL'),nullable = True) 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='SET NULL'),nullable = True) 
        
     def save_comment(self):
         if self not in db.session:
@@ -87,8 +92,8 @@ class Upvote(db.Model):
     __tablename__ = 'upvotes'
     id = id = db.Column(db.Integer,primary_key = True,unique=True)
     upvote_count=  db.Column(db.Integer, default=0)
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id',ondelete='SET NULL'),nullable = True) 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='SET NULL'),nullable = True)
     
     def add_upvote(self):
         if self not in db.session:
@@ -105,8 +110,8 @@ class Downvote(db.Model):
     __tablename__ = 'downvotes'
     id = id = db.Column(db.Integer,primary_key = True,unique=True)
     downvote_count=  db.Column(db.Integer, default=0)
-    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id'))
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    pitch_id = db.Column(db.Integer,db.ForeignKey('pitches.id',ondelete='SET NULL'),nullable = True) 
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id',ondelete='SET NULL'),nullable = True)
     
     def add_downvote(self):
         if self not in db.session:
