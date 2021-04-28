@@ -15,14 +15,16 @@ class PitchTest(unittest.TestCase):
         '''
         Set up method that will run before every Test
         '''
-        self.user_Mugera = User(username = 'Sam',password = 'chklff', email = 'Mukkdkd@ms.com', bio= "A good man",profile_pic_path="/home/photos/db.png")
-        
-        
+        self.user_Mugera = User(username = 'Wiko',password = 'banana', email = 'wiko@ms.com')
+          
         self.new_pitch = Pitch(title='Humour',pitch="He who laughs last is the one who got the joke the last",category="Humour",user = self.user_Mugera)
    
-    # def tearDown(self):
-    #     Pitch.query.delete()
-    #     User.query.delete()
+    def tearDown(self):
+        Pitch.query.delete()
+        User.query.delete()
+        
+    def test_instance(self):
+        self.assertTrue(isinstance(self.new_pitch, Pitch))
   
     
     # We then check if the values of variables are correctly being placed.
@@ -42,6 +44,6 @@ class PitchTest(unittest.TestCase):
 
         self.new_pitch.save_pitch()
         got_pitches = Pitch.get_pitches("Humour")
-        self.assertTrue(len(got_pitches) > 1)
+        self.assertTrue(len(got_pitches) > 0)
 
  
