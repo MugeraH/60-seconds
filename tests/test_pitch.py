@@ -6,16 +6,14 @@ from app import db
 
 class PitchTest(unittest.TestCase):
     '''
-    Test Class to test the behaviour of the Movie class
+    Test Class to test the behaviour of the  class
     '''
           
-    
-
     def setUp(self):
         '''
         Set up method that will run before every Test
         '''
-        self.user_Mugera = User(username = 'Wiko',password = 'banana', email = 'wiko@ms.com')
+        self.user_Mugera = User(username = 'wiko',password = 'banana', email = 'wiko@ms.com')
           
         self.new_pitch = Pitch(title='Humour',pitch="He who laughs last is the one who got the joke the last",category="Humour",user = self.user_Mugera)
    

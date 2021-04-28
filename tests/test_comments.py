@@ -2,9 +2,9 @@ import unittest
 from app.models import Comment,Pitch,User
 from app import db
 
-class PitchTest(unittest.TestCase):
+class CommentsTest(unittest.TestCase):
     '''
-    Test Class to test the behaviour of the Pitch class
+    Test Class to test the behaviour of the class
     '''
 
     def setUp(self):

@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash,check_password_hash
 from datetime import datetime
 from flask_login import UserMixin
 from . import login_manager
-from sqlalchemy.exc import SQLAlchemyError
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -52,13 +52,9 @@ class Pitch(db.Model):
     downvotes = db.relationship('Downvote',backref='pitch',lazy='dynamic')
     
     def save_pitch(self):
-        try:
-            db.session.add(self)
-            db.session.commit()
-        except SQLAlchemyError as e:
-            print(str(e))
-            db.session.rollback()
-        
+        db.session.add(self)
+        db.session.commit()
+       
     @classmethod
     def get_pitches(cls,pitch_category):
         pitches = Pitch.query.filter_by(category=pitch_category).all()
